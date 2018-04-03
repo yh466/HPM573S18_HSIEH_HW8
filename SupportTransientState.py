@@ -12,8 +12,8 @@ def print_outcomes(multi_gameset, coin_type):
 
     # mean and projection interval text of game reward
     reward_mean_PI_text = Format.format_estimate_interval(
-        estimate=multi_gameset.get_mean_total_reward(),
-        interval=multi_gameset.get_PI_total_reward(alpha=P.ALPHA),
+        estimate=multi_gameset.get_overall_mean_reward(),
+        interval=multi_gameset.get_PI_mean_reward(alpha=P.ALPHA),
         deci=1)
 
     # print game reward statistics
@@ -30,8 +30,8 @@ def draw_histograms(multi_cohort_fair_coin, multi_cohort_unfair_coin):
 
     # histograms of game rewards
     set_of_game_rewards = [
-        multi_cohort_fair_coin.get_all_total_rewards(),
-        multi_cohort_unfair_coin.get_all_total_rewards()
+        multi_cohort_fair_coin.get_all_mean_reward(),
+        multi_cohort_unfair_coin.get_all_mean_reward()
     ]
 
     # graph histograms
@@ -56,8 +56,8 @@ def print_comparative_outcomes(multi_cohort_fair_coin, multi_cohort_unfair_coin)
     # increase in survival time
     difference = Stat.DifferenceStatIndp(
         name='Change in expected reward',
-        x=multi_cohort_unfair_coin.get_all_total_rewards(),
-        y_ref=multi_cohort_fair_coin.get_all_total_rewards()
+        x=multi_cohort_unfair_coin.get_all_mean_reward(),
+        y_ref=multi_cohort_fair_coin.get_all_mean_reward()
     )
     # estimate and CI
     estimate_CI = Format.format_estimate_interval(
